@@ -16,7 +16,11 @@ class Reader(object):
             response = input(message)
         return int(response)
     
+<<<<<<< HEAD
     @staticmethod   
+=======
+    @staticmethod
+>>>>>>> cb1027ae1a204c334493d5510d60f0c1ca506492
     def get_names(message,n):
         names = []
         for i in range(1,n+1):
@@ -28,6 +32,7 @@ class Reader(object):
     def load_members():
         file = open("members.txt","r")
         members = {}
+<<<<<<< HEAD
         name=""
         for line in file:
             line=tuple(line)
@@ -51,6 +56,10 @@ class Reader(object):
                 num=''
                 members[name]=element
             name=""
+=======
+        for line in file:
+            pass # fill here
+>>>>>>> cb1027ae1a204c334493d5510d60f0c1ca506492
         file.close()
         return members
 
@@ -62,16 +71,22 @@ class Writer(object):
         members = Reader.load_members()
         for name in members:
             if name in names:
+<<<<<<< HEAD
                 num1=str(members[name][1])
                 num2=str(members[name][0])
                 num3=str(members[name][2])
                 num4=str(round(members[name][1]/members[name][0]*100, 1))
                 out=name+" : "+ num4 + "% (" +num1+ "/" + num2+ ") : "+ " "+num3
                 print(out)
+=======
+                pass # fill here
+        print(out)
+>>>>>>> cb1027ae1a204c334493d5510d60f0c1ca506492
 
     @staticmethod
     def update_history(results):
         members = Reader.load_members()
+<<<<<<< HEAD
         member=list(members.keys())
         player=list(results.keys())
         for players in member:
@@ -81,6 +96,11 @@ class Writer(object):
                                  members[players][2]+results[players][2])
         file = open("members.txt","w")
         file.write(members)
+=======
+        pass # fill here
+        file = open("members.txt","w")
+        pass # fill here
+>>>>>>> cb1027ae1a204c334493d5510d60f0c1ca506492
         file.close()
     
     @staticmethod
@@ -89,5 +109,9 @@ class Writer(object):
         print()
         print("SMaSH Casino Hall-of-Famers")
         members = Reader.load_members()
+<<<<<<< HEAD
         
+=======
+        pass # fill here
+>>>>>>> cb1027ae1a204c334493d5510d60f0c1ca506492
     
