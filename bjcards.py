@@ -1,9 +1,8 @@
 # Playing Cards for Blackjack
-import cards
 from cards import *
-from reader import *
+from view import *
 
-class BJCard(cards.Card):
+class BJCard(Card):
     @property
     def value(self):
         v = BJCard.RANKS.index(self.rank) + 1
@@ -11,7 +10,7 @@ class BJCard(cards.Card):
             v = 10
         return v
 
-class BJDeck(cards.Deck):
+class BJDeck(Deck):
     def fresh_deck(self):
         for s in BJCard.SUITS:
             for r in BJCard.RANKS:
@@ -19,7 +18,7 @@ class BJDeck(cards.Deck):
         import random
         random.shuffle(self.cards)
 
-class BJHand(cards.Hand):
+class BJHand(Hand):
     def __init__(self,name):
         super(BJHand,self).__init__()
         self.name = name
@@ -62,27 +61,32 @@ class BJPlayer(BJHand):
     def __init__(self, name):
         super(BJPlayer,self).__init__(name)
         self.chips = 0
+        self.wins = 0
         
     def hit(self):
         return self.total < 21 and \
                Reader.ox(self.name + ": Hit?(o/x) ")
         
     def bust(self):
+        self.wins -= 1
+        self.chips -= 1
         print(self.name,"busts.")
-        self.lose()
     
     def lose(self):
+        self.wins -= 1
+        self.chips -= 1
         print(self.name,"loses.")
     
-    def win(self):
-        print(self.name,"wins.")
-        
-    def earn_chips(self,n):
+    def win(self,n):
+        self.wins += 1
         self.chips += n
-        print(self.name, "has", self.chips, "chips.")
+        print(self.name,"wins.")
+
+    def draw(self):
+        self.wins += 0.5
+        print(self.name,"draws.")
         
-    def lose_chips(self,n):
-        self.chips -= n
+    def print_chips(self):
         print(self.name, "has", self.chips, "chips.")
 
 class BJDealer(BJHand):
