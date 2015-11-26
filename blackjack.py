@@ -70,6 +70,7 @@ def main():
     print("Welcome to SMaSH Casino!")
     head_count = Reader.get_number("How many players? (1-4) ",1,4)
     names = Reader.get_names("Enter your name : ", head_count)
+    Writer.show_history(names)
     game = BJController(names)
     counter = 0
     while True:
@@ -78,6 +79,11 @@ def main():
         counter += 1
         if not Reader.ox("Play more? (o/x) "):
             break
+    results={}
+    for player in game.players:
+        results[player.name]=(counter, player.wins, player.chips)
+    Writer.update_history(results)
+    Writer.show_top5()
     print("Bye, everyone!")
     
 main()
