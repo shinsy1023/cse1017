@@ -1,0 +1,6 @@
+t=open("members.txt","r")
+members=t.readlines()
+print(members)
+print(members[1].index(','))
+members[1]=members[1][4:]
+print(members)

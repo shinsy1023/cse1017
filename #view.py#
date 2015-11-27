@@ -73,7 +73,6 @@ class Writer(object):
     def update_history(results):
         members = Reader.load_members()
         self.member=list(members.keys())
-        print(self.member)
         player=list(results.keys())
         result=""
         for players in member:
