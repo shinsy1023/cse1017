@@ -72,8 +72,8 @@ class Writer(object):
     @staticmethod
     def update_history(results):
         members = Reader.load_members()
-        self.member=list(members.keys())
-        print(self.member)
+        member=list(members.keys())
+        print(member)
         player=list(results.keys())
         result=""
         for players in member:
@@ -89,28 +89,29 @@ class Writer(object):
     
     @staticmethod
     def show_top5():
-        rank=[]
+        rank=[1,2,3,4,5]
         chip=[-100, -100, -100, -100, -100]
         print("== end ==")
         print()
         print("SMaSH Casino Hall-of-Famers")
         members = Reader.load_members()
-        for _ in self.member:
-            for name in self.member:
-                if members[name][2]>chip[0]:
+        member=list(members.keys())
+        for _ in member:
+            for name in member:
+                if members[name][2]>=chip[0]:
                     rank[0]=name
                     chip[0]=members[name][2]
-                elif members[name][2]>chip[1]:
+                elif members[name][2]>=chip[1]:
                     rank[1]=name
                     chip[1]=members[name][2]
-                elif members[name][2]>chip[2]:
+                elif members[name][2]>=chip[2]:
                     rank[2]=name
                     chip[2]=members[name][2]
-                elif members[name][2]>chip[3]:
+                elif members[name][2]>=chip[3]:
                     rank[3]=name
                     chip[3]=members[name][2]
                 else:
                     rank[4]=name
                     chip[4]=members[name][2]
-        for i in range(self.member):
-            print(rank[i]+" : "+chip[i])
+        for i in range(5):
+            print(str(rank[i])+" : "+str(chip[i]))
