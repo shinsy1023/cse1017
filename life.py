@@ -32,22 +32,73 @@ class Life(object):
         
     def __neighbors(self, x, y):
         count = 0
-        if pat[y-1][x-1]==1:
-            count+=1
-        if pat[y][x-1]==1:
-            count+=1
-        if pat[y+1][x-1]==1:
-            conut+=1
-        if pat[y-1][x]==1:
-            count+=1
-        if pat[y+1][x]==1:
-            count+=1
-        if pat[y-1][x+1]==1:
-            count+=1
-        if self.matrix[y][x+1]==1:
-            count+=1
-        if self.matrix[y+1][x+1]==1:
-            count+=1# 좌표 (x,y) 주위의 8개 셀에서 살아있는 셀의 개수를 세어서 count에 기억함
+        if x==0 or y==0 or x==self.cols-1 or y==self.rows-1:
+            if x==0 and y==0:
+                if self.matrix[0][1]==1:
+                    count+=1
+                if self.matrix[1][0]==1:
+                    count+=1
+                if self.matrix[1][1]==1:
+                    count+=1
+            elif x==0:
+                if self.matrix[y-1][x]==1:
+                    count+=1
+                if self.matrix[y+1][x]==1:
+                    count+=1
+                if self.matrix[y-1][x+1]==1:
+                    count+=1
+                if self.matrix[y][x+1]==1:
+                    count+=1
+                if self.matrix[y+1][x+1]==1:
+                    count+=1
+            elif y==0:
+                if self.matrix[y][x-1]==1:
+                    count+=1
+                if self.matrix[y+1][x-1]==1:
+                    conut+=1
+                if self.matrix[y+1][x]==1:
+                    count+=1
+                if self.matrix[y+1][x+1]==1:
+                    count+=1
+            elif x==self.cols-1:
+                if self.matrix[y-1][x-1]==1:
+                    count+=1
+                if self.matrix[y][x-1]==1:
+                        count+=1
+                if self.matrix[y+1][x-1]==1:
+                    conut+=1
+                if self.matrix[y-1][x]==1:
+                    count+=1
+                if self.matrix[y+1][x]==1:
+                    count+=1
+            elif y==self.rows-1:
+                if self.matrix[y-1][x-1]==1:
+                    count+=1
+                if self.matrix[y][x-1]==1:
+                    count+=1
+                if self.matrix[y-1][x]==1:
+                    count+=1
+                if self.matrix[y-1][x+1]==1:
+                    count+=1
+                if self.matrix[y][x+1]==1:
+                    count+=1
+        else:
+            if self.matrix[y-1][x-1]==1:
+                count+=1
+            if self.matrix[y][x-1]==1:
+                    count+=1
+            if self.matrix[y+1][x-1]==1:
+                conut+=1
+            if self.matrix[y-1][x]==1:
+                count+=1
+            if self.matrix[y+1][x]==1:
+                count+=1
+            if self.matrix[y-1][x+1]==1:
+                count+=1
+            if self.matrix[y][x+1]==1:
+                count+=1
+            if self.matrix[y+1][x+1]==1:
+                count+=1# 좌표 (x,y) 주위의 8개 셀에서 살아있는 셀의 개수를 세어서 count에 기억함
         return count
         
     def lifecycle(self):
@@ -128,7 +179,18 @@ class Pattern(object):
                  [0,1,1,0,1],
                  [1,0,1,0,1]]
     INFINITY3 = [[1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,0,1,1,1,1,1]]
-    GOSPER_GLIDER_GUN = [] # (to be filled)
+    GOSPER_GLIDER_GUN =  [
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0],
+[0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0],
+[0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
+[0,1,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]] # (to be filled)
     
 class LifeWriter(object):
     def __init__(self, life, width, height, unit):
@@ -146,17 +208,17 @@ class LifeWriter(object):
     def animate(self):
         self.__canvas.delete(ALL)
         self.__life.lifecycle()
-        # Canvas 전체를 지우고 세대교체를 한다음 __draw_matrix()를 호출하여 새로 그린다.  
+        self.__draw_matrix# Canvas 전체를 지우고 세대교체를 한다음 __draw_matrix()를 호출하여 새로 그린다.  
         self.__canvas.after(500, self.animate)
 
     def __draw_matrix(self):
         for row in range(self.__life.rows):
             for col in range(self.__life.rows):
-                if self.__life.matrix[row][col]==1:
-                    print("■", end='')
+                if self.__life.matrix[col][row]==1:
+
                 else:
-                    print(" ", end='')
-            print()# self.__life.matrix의 원소를 하나씩 검사하여 1에 해당하는 셀을 빨간색 정사각형으로 칠한다.
+                    
+# self.__life.matrix의 원소를 하나씩 검사하여 1에 해당하는 셀을 빨간색 정사각형으로 칠한다.
     
 class LifeController(object):
     def __init__(self, pattern, width, height, unit):
