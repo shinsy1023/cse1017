@@ -32,17 +32,17 @@ class Life(object):
         
     def __neighbors(self, x, y):
         count = 0
-        if pat[y-1][x-1]==1:
+        if self.matrix[y-1][x-1]==1:
             count+=1
-        if pat[y][x-1]==1:
+        if self.matrix[y][x-1]==1:
             count+=1
-        if pat[y+1][x-1]==1:
+        if self.matrix[y+1][x-1]==1:
             conut+=1
-        if pat[y-1][x]==1:
+        if self.matrix[y-1][x]==1:
             count+=1
-        if pat[y+1][x]==1:
+        if self.matrix[y+1][x]==1:
             count+=1
-        if pat[y-1][x+1]==1:
+        if self.matrix[y-1][x+1]==1:
             count+=1
         if self.matrix[y][x+1]==1:
             count+=1
@@ -146,7 +146,7 @@ class LifeWriter(object):
     def animate(self):
         self.__canvas.delete(ALL)
         self.__life.lifecycle()
-        # Canvas 전체를 지우고 세대교체를 한다음 __draw_matrix()를 호출하여 새로 그린다.  
+        self.__draw_matrix()# Canvas 전체를 지우고 세대교체를 한다음 __draw_matrix()를 호출하여 새로 그린다.  
         self.__canvas.after(500, self.animate)
 
     def __draw_matrix(self):
