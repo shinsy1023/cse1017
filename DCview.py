@@ -20,3 +20,6 @@ class Reader(object):
             else:
                 num=input("Type the number.")
         return num
+
+class writer(object):
+    def 

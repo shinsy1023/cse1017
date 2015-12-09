@@ -12,7 +12,10 @@ class Card(object):
 
     def __str__(self):
         if self.face_up:
-            return self.color+self.number.rjust(3)+" "
+            if self.number!="13":
+                return self.color+self.number.rjust(3)+" "
+            else:
+                return self.color+"-".rjust(3)+" "
         else:
             return "XXXXX"
         
@@ -22,6 +25,7 @@ class Card(object):
 class Hand(object):
     def __init__(self):
         self.cards=[]
+        self.joker=0
 
     def __str__(self):
         if len(self.cards) == 0:
@@ -46,12 +50,6 @@ class Hand(object):
         if card in hand.cards:
             hand.cards[hand.index(card)].flip()
 
-    def set_Joker(self, hand):
-        self.joker=0
-        for card in hand.cards:
-            if card=="13":
-                self.joker+=1
-
     def win(self):
         print("You win!")
         
@@ -69,6 +67,8 @@ class Hand(object):
         num=14
         for i in range(len(self.cards)):
             num=int(self.cards[i].number)
+            if num==13:
+                self.joker+=1
             num_list.append(num)
         num_list.sort()
         for i in range(len(self.cards)):
@@ -99,17 +99,3 @@ class Deck(Hand):
         if open :
             card.flip()
         self.give(card,hand)
-
-deck=Deck()
-deck.fresh_deck()
-hand=Hand()
-print(hand)
-for _ in range(5):
-    deck.draw(hand)
-print(hand)
-hand.open()
-print(hand)
-hand.sorting()
-print(hand)
-# hand.cards.sort()
-# print(hand)
