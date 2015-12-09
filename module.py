@@ -1,6 +1,6 @@
 class Card(object):
     COLORS=["White", "Black"]
-    NUMBERS=["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "-"]
+    NUMBERS=["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"]
 
     def __init__(self, color, number, face_up=False):
         if color in Card.COLORS and number in Card.NUMBERS:
@@ -49,8 +49,37 @@ class Hand(object):
     def set_Joker(self, hand):
         self.joker=0
         for card in hand.cards:
-            if card=="-":
+            if card=="13":
                 self.joker+=1
+
+    def win(self):
+        print("You win!")
+        
+    def lose (self):
+        print("You lose!")
+
+    def open(self):
+        for card in self.cards:
+            card.face_up=True
+
+    def sorting(self):
+        sort=[]
+        num_list=[]
+        all_card=self.cards
+        num=14
+        for i in range(len(self.cards)):
+            num=int(self.cards[i].number)
+            num_list.append(num)
+        num_list.sort()
+        for i in range(len(self.cards)):
+            for j in range(len(self.cards)):
+                if all_card[j].number==str(num_list[i]):
+                    sort.append(all_card[j])
+                    print(sort, num_list)
+                    all_card.remove(all_card[j])
+                    print(all_card)
+                    break
+        self.cards=sort
                 
 class Deck(Hand):
     def fresh_deck(self):
@@ -61,11 +90,24 @@ class Deck(Hand):
         import random
         random.shuffle(self.cards)
         
-    def draw(self, hand, how_many=1, open=False):
+    def draw(self, hand, open=False):
         if self.cards == []:
             self.fresh_deck()
-        for _ in range(how_many):
-            card = self.cards[0]
-            if open :
-                card.flip()
-            self.give(card,hand)
+        card = self.cards[0]
+        if open :
+            card.flip()
+        self.give(card,hand)
+
+deck=Deck()
+deck.fresh_deck()
+hand=Hand()
+print(hand)
+for _ in range(5):
+    deck.draw(hand)
+print(hand)
+hand.open()
+print(hand)
+hand.sorting()
+print(hand)
+# hand.cards.sort()
+# print(hand)
