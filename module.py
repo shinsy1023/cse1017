@@ -75,9 +75,7 @@ class Hand(object):
             for j in range(len(self.cards)):
                 if all_card[j].number==str(num_list[i]):
                     sort.append(all_card[j])
-                    print(sort, num_list)
                     all_card.remove(all_card[j])
-                    print(all_card)
                     break
         self.cards=sort
                 
