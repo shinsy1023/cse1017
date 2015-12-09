@@ -77,6 +77,10 @@ class Hand(object):
                     sort.append(all_card[j])
                     all_card.remove(all_card[j])
                     break
+        for i in range(len(sort)-1):
+            if sort[i].number==sort[i+1].number:
+                if sort[i].color=="White":
+                    sort[i], sort[i+1]=sort[i+1], sort[i]
         self.cards=sort
                 
 class Deck(Hand):
