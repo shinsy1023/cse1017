@@ -12,7 +12,7 @@ class Reader(object):
      #   hard=input("Type the level of difficulty you want.")
       #  return hard
 
-    def get_number(self):
+    def get_number():
         num=input("Type the number.")
         while True:
             if num.isdigit():
@@ -20,6 +20,3 @@ class Reader(object):
             else:
                 num=input("Type the number.")
         return num
-
-class writer(object):
-    def 
