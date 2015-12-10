@@ -17,6 +17,7 @@ class DCplayer(Hand):
         left=[]
         right=[]
         while self.joker!=0:
+            print("You have to insert your Joker! ",end='')
             loc=Reader.select_loc(self, self)
             if self.cards[len(self.cards)-1].color=="White":
                 self.white_joker=loc
@@ -33,15 +34,14 @@ class DCplayer(Hand):
         num=0
         import random
         while True:
-            print("match")
             num=random.randrange(len(self.cards))
             if self.check_correct[num]=="Covered":
                 break
         if self.cards[num-1]==card:
-            print("right")
+            print("\n\n\n\n\nCPU is right")
             self.cards[self.cards.index(card)].check=1
         else:
-            print("wrong")
+            print("\n\n\n\n\nCPU is wrong")
             you.wrong()
 
     def status(self):
@@ -77,11 +77,12 @@ class DCplayer(Hand):
             return True
 
     def wrong(self):
-        print("You wrong!")
+        print("You wrong! You have to open your card.")
         loc=Reader.select_loc(self, self)
         while True:
             if self.check_correct[loc-1]=="Covered":
                 self.cards[loc-1].check=1
+                self.sorting(None)
                 break
             else:
                 loc=Reader.select_loc(self, self)
@@ -104,7 +105,7 @@ class DCcpu(Hand):
                 import random
                 loc=random.randrange(2)
                 if loc==0:
-                    return 1
+                    return 2
                 else:
                     return len(self.cards)-1
 

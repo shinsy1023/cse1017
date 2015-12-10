@@ -31,6 +31,8 @@ class Hand(object):
         self.joker=0
         self.white_joker=13
         self.black_joker=13
+        self.w_joker=0
+        self.b_joker=0
 
     def __str__(self):
         if len(self.cards) == 0:
@@ -57,8 +59,10 @@ class Hand(object):
         num=Reader.get_number()
         if num==self.cards[loc-1].number:
             self.cards[loc-1].flip()
+            return True
         else:
             player.wrong()
+            return False
 
     def win(self):
         print("You win!")
@@ -80,14 +84,15 @@ class Hand(object):
         num=14
         for i in range(len(self.cards)):
             num=int(self.cards[i].number)
-            if num==13 and (self.white_joker==13 or self.black_joker==13):
-                if len(self.cards)>4:
-                    self.joker+=1
+            if num==13 and (self.w_joker==0 or self.b_joker==0):
+                if i==len(self.cards)-1:
+                    if len(self.cards)>5:
+                        self.joker+=1
             num_list.append(num)
         num_list.sort()
         for i in range(len(self.cards)):
             for j in range(len(self.cards)):
-                if all_card[j].number==str(num_list[i]):
+                if int(all_card[j].number)==num_list[i]:
                     sort.append(all_card[j])
                     if all_card[j]==card:
                         new_loc=i
