@@ -17,7 +17,7 @@ class Card(object):
             else:
                 return self.color+"-".rjust(3)+" "
         else:
-            return "XXXXX"
+            return self.color+"XX"
         
     def flip(self):
         self.face_up=not self.face_up
@@ -46,8 +46,8 @@ class Hand(object):
         self.cards.remove(card)
         hand.add(card)
 
-    def match(self, card, hand):
-        if card in hand.cards:
+    def match(self, card):
+        if card in self.cards:
             hand.cards[hand.index(card)].flip()
 
     def win(self):
@@ -93,9 +93,8 @@ class Deck(Hand):
         random.shuffle(self.cards)
         
     def draw(self, hand, open=False):
-        if self.cards == []:
-            self.fresh_deck()
-        card = self.cards[0]
-        if open :
-            card.flip()
-        self.give(card,hand)
+        if self.cards != []:
+            card = self.cards[0]
+            if open :
+                card.flip()
+            self.give(card,hand)
